@@ -1,2 +1,4 @@
-/home/hoscho/NetBeansProjects/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/X11Forwarding.java
-/home/hoscho/NetBeansProjects/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/StreamForwarding.java
+/root/git/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/StreamForwarding.java
+/root/git/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/PortForwardingR.java
+/root/git/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/PortForwardingL.java
+/root/git/sshclient/src/main/java/de/jgsoftwares/sshclient/sshclient/X11Forwarding.java

@@ -1,4 +1,8 @@
-de/jgsoftwares/sshclient/sshclient/X11Forwarding.class
 de/jgsoftwares/sshclient/sshclient/StreamForwarding$MyUserInfo.class
+de/jgsoftwares/sshclient/sshclient/PortForwardingR.class
 de/jgsoftwares/sshclient/sshclient/StreamForwarding.class
+de/jgsoftwares/sshclient/sshclient/PortForwardingL.class
+de/jgsoftwares/sshclient/sshclient/PortForwardingR$MyUserInfo.class
 de/jgsoftwares/sshclient/sshclient/X11Forwarding$MyUserInfo.class
+de/jgsoftwares/sshclient/sshclient/X11Forwarding.class
+de/jgsoftwares/sshclient/sshclient/PortForwardingL$MyUserInfo.class
