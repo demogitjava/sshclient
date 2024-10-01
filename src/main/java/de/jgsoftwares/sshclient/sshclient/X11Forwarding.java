@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package de.jgsoftwares.sshclient.sshclient;
 
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
@@ -23,11 +19,11 @@ public class X11Forwarding{
     
     
     
- // export DISPLAY=127.0.0.1:0.0
+ // export DISPLAY=127.0.0.1:10.0
  // exit -> connection
    
  // after the connection from your system with
- // ssh -X root@172.17.0.100 and the host is available
+ // ssh -X root@127.0.0.1 and the host is available
     
     
   public static void main(String[] arg){
@@ -45,7 +41,7 @@ public class X11Forwarding{
       else{
         host=JOptionPane.showInputDialog("Enter username@hostname",
                                          System.getProperty("user.name")+
-                                         "@172.17.0.100"); 
+                                         "@127.0.0.1"); 
       }
       String user=host.substring(0, host.indexOf('@'));
       host=host.substring(host.indexOf('@')+1);
