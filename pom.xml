@@ -6,10 +6,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
      <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>de.jgsoftwares.sshclient.sshclient.StreamForwarding</exec.mainClass>
+        <exec.mainClass>de.jgsoftwares.sshclient.sshclient.X11Forwarding</exec.mainClass>
     </properties>
     
     
@@ -26,27 +26,16 @@
    <build>
         <plugins>
            
-            
-            
-            
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
-                   <configuration>
-                     <archive>
-                       <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                     </archive>
-                   </configuration>
-              </plugin>
-               
-                <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
                     
                     <showDeprecation>true</showDeprecation>
+                       <archive>
+                         <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                       </archive>
                 </configuration>
             </plugin>
               
