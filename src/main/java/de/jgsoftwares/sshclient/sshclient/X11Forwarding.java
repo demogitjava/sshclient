@@ -15,7 +15,8 @@ import com.jcraft.jsch.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class X11Forwarding{
+public class X11Forwarding
+{
     
     
     

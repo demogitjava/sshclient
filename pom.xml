@@ -5,11 +5,13 @@
     <artifactId>sshclient</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    
      <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>de.jgsoftwares.sshclient.sshclient.X11Forwarding</exec.mainClass>
+       
     </properties>
     
     
@@ -24,21 +26,39 @@
    
    
    <build>
+        <finalName>JDesktopClient</finalName>
+
         <plugins>
-           
+          
+
+                   <plugin>
+                    <!-- Build an executable JAR -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                      <archive>
+                        <manifest>
+                          <addClasspath>true</addClasspath>
+                          <classpathPrefix>lib/</classpathPrefix>
+                          <mainClass>de.jgsoftwares.sshclient.sshclient.X11Forwarding</mainClass>
+                        </manifest>
+                      </archive>
+                    </configuration>
+                  </plugin>
+
+
+                
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>2.3.2</version>
                 <configuration>
-                    
-                    <showDeprecation>true</showDeprecation>
-                       <archive>
-                         <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                       </archive>
+                    <debug>false</debug>
                 </configuration>
             </plugin>
-              
         </plugins>
+
+
     </build>
 </project>
