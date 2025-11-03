@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.jgsoftwares.sshclient.sshclient;
 
 
@@ -36,9 +31,11 @@ public class Shell{
       session.setPassword(passwd);
 
       UserInfo ui = new MyUserInfo(){
+        @Override
         public void showMessage(String message){
           JOptionPane.showMessageDialog(null, message);
         }
+        @Override
         public boolean promptYesNo(String message){
           Object[] options={ "yes", "no" };
           int foo=JOptionPane.showOptionDialog(null, 
@@ -104,12 +101,19 @@ public class Shell{
 
   public static abstract class MyUserInfo
                           implements UserInfo, UIKeyboardInteractive{
+    @Override
     public String getPassword(){ return null; }
+    @Override
     public boolean promptYesNo(String str){ return false; }
+    @Override
     public String getPassphrase(){ return null; }
+    @Override
     public boolean promptPassphrase(String message){ return false; }
+    @Override
     public boolean promptPassword(String message){ return false; }
+    @Override
     public void showMessage(String message){ }
+    @Override
     public String[] promptKeyboardInteractive(String destination,
                                               String name,
                                               String instruction,

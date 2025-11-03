@@ -1,5 +1,4 @@
 package de.jgsoftwares.sshclient.sshclient;
-
 import com.jcraft.jsch.*;
 import java.awt.*;
 import javax.swing.*;
@@ -7,8 +6,8 @@ import javax.swing.*;
 public class X11Forwarding{
 public static void main(String[] arg){
 
-String xhost="127.0.0.1";
-int xport=0;
+String xhost="192.168.10.56";
+int xport=10;
 
 try{
   JSch jsch=new JSch();  
@@ -55,7 +54,9 @@ catch(Exception e){
 }
 
 public static class MyUserInfo implements UserInfo, UIKeyboardInteractive{
+@Override
 public String getPassword(){ return passwd; }
+@Override
 public boolean promptYesNo(String str){
   Object[] options={ "yes", "no" };
   int foo=JOptionPane.showOptionDialog(null, 
@@ -70,8 +71,11 @@ public boolean promptYesNo(String str){
 String passwd;
 JTextField passwordField=(JTextField)new JPasswordField(20);
 
+@Override
 public String getPassphrase(){ return null; }
+@Override
 public boolean promptPassphrase(String message){ return true; }
+@Override
 public boolean promptPassword(String message){
   Object[] ob={passwordField}; 
   int result=
@@ -83,6 +87,7 @@ return true;
   }
   else{ return false; }
 }
+@Override
 public void showMessage(String message){
   JOptionPane.showMessageDialog(null, message);
 }
@@ -92,6 +97,7 @@ final GridBagConstraints gbc =
                          GridBagConstraints.NONE,
                          new Insets(0,0,0,0),0,0);
 private Container panel;
+@Override
 public String[] promptKeyboardInteractive(String destination,
                                           String name,
                                           String instruction,
