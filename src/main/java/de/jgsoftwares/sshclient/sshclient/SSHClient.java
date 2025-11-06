@@ -10,11 +10,17 @@ import org.apache.sshd.common.future.CancelOption;
 import org.apache.sshd.common.util.io.input.NoCloseInputStream;
 import org.apache.sshd.common.util.io.output.NoCloseOutputStream;
 
+import org.apache.sshd.common.cipher.ChaCha20Cipher;
    
 import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+
+import de.jgsoftwares.sshclient.sshclient.SSHConnect;
+import java.util.Arrays;
+import java.util.Collection;
+import org.apache.sshd.common.cipher.BuiltinCiphers;
 /**
  *
  * @author root
@@ -26,11 +32,16 @@ public class SSHClient {
     String stconnect = null;
     String stpassword = null;
     
+    SSHClient sshclient;
+    
    
     public static void main(String[] args) 
     {
-        SSHClient sshclient = new SSHClient();
-        SSHConnect sshconnect = new SSHConnect();
+        org.apache.sshd.client.SshClient sshclient = new org.apache.sshd.client.SshClient();
+        // chacha20 - cc20p1305_openssh 
+        sshclient.setCipherFactories(Arrays.asList(BuiltinCiphers.cc20p1305_openssh));
+      
+        de.jgsoftwares.sshclient.sshclient.SSHConnect sshconnect = new de.jgsoftwares.sshclient.sshclient.SSHConnect();
         sshconnect.setVisible(true);
         
         
@@ -38,10 +49,6 @@ public class SSHClient {
        
     
     
-    public void connectto() throws IOException 
-    {
-    
-       
-    }
+
     
 }
