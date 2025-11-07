@@ -23,7 +23,7 @@ import java.util.Collection;
 import org.apache.sshd.common.cipher.BuiltinCiphers;
 /**
  *
- * @author root
+ * @author hoscho
  */
 public class SSHClient {
 
@@ -32,11 +32,11 @@ public class SSHClient {
     String stconnect = null;
     String stpassword = null;
     
-    SSHClient sshclient;
     
    
     public static void main(String[] args) 
     {
+        //SSHClientminia sshmina = new SSHClientminia();
         org.apache.sshd.client.SshClient sshclient = new org.apache.sshd.client.SshClient();
         // chacha20 - cc20p1305_openssh 
         sshclient.setCipherFactories(Arrays.asList(BuiltinCiphers.cc20p1305_openssh));

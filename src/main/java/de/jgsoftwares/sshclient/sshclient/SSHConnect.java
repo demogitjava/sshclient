@@ -21,7 +21,7 @@ import org.apache.sshd.common.util.io.output.NoCloseOutputStream;
  */
 public class SSHConnect extends javax.swing.JFrame {
 
-    
+    ClientChannel channel;
     String stuser = null;
     String sthost = null;
     String stpassword = null;
@@ -135,13 +135,27 @@ public class SSHConnect extends javax.swing.JFrame {
            CancelOption.CANCEL_ON_TIMEOUT).getSession();
            
            session.addPasswordIdentity(stpassword);
+           //channel = session.createShellChannel();
+           try(ClientChannel channel = session.createChannel(ClientChannel.CHANNEL_SHELL)) 
+           {
+             
+              channel.setIn(new NoCloseInputStream(System.in));
+              channel.setOut(new NoCloseOutputStream(System.out));
+              channel.setErr(new NoCloseOutputStream(System.err));
+              channel.open();
+              //channel.waitFor(ClientChannel.CLOSED, 0);
+          } catch(Exception e)
+          {
+              session.close(false);
+          }
+           
            
            //session.auth().verify(1000, TimeUnit.SECONDS, CancelOption.CANCEL_ON_TIMEOUT);
            session.auth();
-           ClientChannel channel =session.createShellChannel();
-           channel.setOut(new NoCloseOutputStream(System.out));
-           channel.setRedirectErrorStream(true);
-           channel.setIn(new NoCloseInputStream(System.in));
+           //ClientChannel channel =session.createShellChannel();
+           //channel.setOut(new NoCloseOutputStream(System.out));
+           //channel.setRedirectErrorStream(true);
+           //channel.setIn(new NoCloseInputStream(System.in));
            //channel.open().verify(1000, TimeUnit.SECONDS, 
            //CancelOption.CANCEL_ON_TIMEOUT);
    
