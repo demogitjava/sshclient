@@ -3,6 +3,7 @@ package de.jgsoftwares.sshclient;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.concurrent.TimeUnit;
 import org.apache.sshd.client.ClientFactoryManager;
 import org.apache.sshd.client.SshClient;
@@ -15,6 +16,7 @@ import org.apache.sshd.common.future.CancelOption;
 import org.apache.sshd.common.util.io.input.NoCloseInputStream;
 import org.apache.sshd.common.util.io.output.NoCloseOutputStream;
 import org.apache.sshd.common.FactoryManager;
+import org.apache.sshd.common.channel.Channel;
 /**
  *
  * @author hoscho
@@ -127,7 +129,7 @@ public class NewJPanel extends javax.swing.JPanel {
     public void sshconnect(String stuser, String stpassword, String sthost) throws IOException
     {
            org.apache.sshd.client.SshClient sshclient = new org.apache.sshd.client.SshClient();
-           sshclient.setCipherFactories(Arrays.asList(BuiltinCiphers.cc20p1305_openssh));
+           sshclient.setCipherFactories(Arrays.asList(BuiltinCiphers.cc20p1305_openssh, BuiltinCiphers.aes256ctr, BuiltinCiphers.aes192ctr));
            SshClient client = SshClient.setUpDefaultClient();
            
            
@@ -137,24 +139,38 @@ public class NewJPanel extends javax.swing.JPanel {
           
            client.start();
            ConnectFuture connectFuture = client.connect(stuser, new InetSocketAddress(sthost, 22));
-           ClientSession session = connectFuture.verify(1000, TimeUnit.SECONDS, 
-           CancelOption.CANCEL_ON_TIMEOUT).getSession();
            
+           ClientSession session = connectFuture.verify(1000, TimeUnit.SECONDS, CancelOption.CANCEL_ON_TIMEOUT).getSession();
+          
            session.addPasswordIdentity(stpassword);
            //channel = session.createShellChannel();
            
           
-              ClientChannel channel = session.createChannel(ClientChannel.CHANNEL_SHELL);
-              channel.setIn(new NoCloseInputStream(System.in));
-              channel.setOut(new NoCloseOutputStream(System.out));
-              channel.setErr(new NoCloseOutputStream(System.err));
-              channel.open();
+              //ClientChannel channel = session.createChannel(ClientChannel.CHANNEL_SHELL);
+              //ClientChannel channel = session.createShellChannel();
+              
+              ClientChannel channel;
+              channel = session.createChannel(Channel.CHANNEL_EXEC, stpassword); 
+              channel.setOut(new NoCloseOutputStream(System.out)); 
+              channel.setErr(new NoCloseOutputStream(System.err)); 
+              channel.open().await(); 
+              //channel.waitFor(EnumSet.of(ClientChannel.ClientChannelEvent.CLOSED), 0);
+             
+              channel.close(); 
+              session.close(false); 
+              client.stop();
+              
+              //channel.setIn(new NoCloseInputStream(System.in));
+              //channel.setOut(new NoCloseOutputStream(System.out));
+              //channel.setErr(new NoCloseOutputStream(System.err));
+              //channel.open();
               //channel.waitFor(ClientChannel.CLOSED, 0);
           
            
            
            //session.auth().verify(1000, TimeUnit.SECONDS, CancelOption.CANCEL_ON_TIMEOUT);
            session.auth();
+           
            //ClientChannel channel =session.createShellChannel();
            //channel.setOut(new NoCloseOutputStream(System.out));
            //channel.setRedirectErrorStream(true);
