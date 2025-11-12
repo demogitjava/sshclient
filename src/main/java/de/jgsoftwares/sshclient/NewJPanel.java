@@ -150,7 +150,7 @@ public class NewJPanel extends javax.swing.JPanel {
               //ClientChannel channel = session.createShellChannel();
               
               ClientChannel channel;
-              channel = session.createChannel(Channel.CHANNEL_EXEC, stpassword); 
+              channel = session.createChannel(Channel.CHANNEL_SUBSYSTEM, stpassword); 
               channel.setOut(new NoCloseOutputStream(System.out)); 
               channel.setErr(new NoCloseOutputStream(System.err)); 
               channel.open().await(); 
